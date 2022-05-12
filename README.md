@@ -18,7 +18,7 @@ support@appsflyer.com
 Add to your build.gradle file:
 
 ```
-implementation 'com.appsflyer:af-android-purchase-connector:6.0.0'
+implementation 'com.appsflyer:purchase-connector:0.1.0'
 implementation 'com.android.billingclient:billing:$play_billing_version'
 ```
 
