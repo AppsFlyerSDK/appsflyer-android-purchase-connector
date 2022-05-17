@@ -26,7 +26,6 @@ where play_billing_version is 3.x.x. Note, version 4 of Billing Client is not su
 
 ### 🚀 Basic integration of the SDK
 #### Java
-
 ```
 new PurchaseClient.Builder(
                 // context
