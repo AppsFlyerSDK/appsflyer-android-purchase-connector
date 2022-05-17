@@ -2,7 +2,7 @@
 
 # Android Purchase Connector
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AppsFlyerSDK/android-purchase-connector/blob/main/LICENSE)
 
 🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to
 support@appsflyer.com
@@ -25,6 +25,7 @@ implementation 'com.android.billingclient:billing:$play_billing_version'
 where play_billing_version is 3.x.x. Note, version 4 of Billing Client is not supported!
 
 ### 🚀 Basic integration of the SDK
+#### Java
 
 ```
 new PurchaseClient.Builder(
@@ -65,4 +66,44 @@ new PurchaseClient.Builder(
                 })
                 // Build the client and automatically starts it
                 .build();
+```
+#### Kotlin
+```kotlin
+        PurchaseClient.Builder(
+            // context
+            this,
+            // Store enum
+            Store.GOOGLE
+        )
+            // Enable subs auto logging
+            .logSubscriptions(true)
+            // Set sandbox (false by default)
+            .setSandbox(true)
+            // Purchase Event Data source listener. Invoked before sending data to AF servers
+            // to let customer add extra parameters to the payload
+            .setPurchaseEventDataSource(object : PurchaseEventDataSource {
+                override fun onNewPurchases(purchaseEvents: List<PurchaseEvent>): Map<String, Any> {
+                    val additionalParams: MutableMap<String, Any> = HashMap()
+                    Log.d(LOG_TAG, "[PurchaseConnector]: Data Source invoked")
+                    for (p in purchaseEvents) {
+                        Log.d(LOG_TAG, "SKU = " + p.sku)
+                        additionalParams["customParam"] = p.sku
+                    }
+                    return additionalParams
+                }
+            })
+            // Purchase Validation listener. Invoked after getting response from AF servers
+            // to let customer know if purchase was validated successfully
+            .setValidationResultListener(object : ValidationResultListener {
+                override fun onSuccess(result: String?) {
+                    Log.d(LOG_TAG, "[PurchaseConnector]: Validation success: $result")
+                }
+
+                override fun onFail(result: String, error: Throwable?) {
+                    Log.d(LOG_TAG, "[PurchaseConnector]: Validation fail: $result")
+                    error?.printStackTrace()
+                }
+            })
+            // Build the client and automatically starts it
+            .build()
 ```
