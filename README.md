@@ -11,9 +11,9 @@ support@appsflyer.com
 
 <!-- TOC start -->
 ## Table Of Content
-  * [This Module Is Built For](#plugin-build-for)
-  * [Adding The SDK To Your Project](#install-sdk)
-  * [Basic Integration Of The SDK](#basic-integration)
+  * [This Module is Built for](#plugin-build-for)
+  * [Adding The Connector To Your Project](#install-connector)
+  * [Basic Integration Of The Connector](#basic-integration)
     + [Create PurchaseClient Instance ](#create-instance)
     + [Start Observing Transactions](#start)
     + [Stop Observing Transactions](#stop)
@@ -29,11 +29,11 @@ support@appsflyer.com
   * [Full Code Example](#example)
 <!-- TOC end -->
 
-## <a id="plugin-build-for"> This Module Is Built For
+## <a id="plugin-build-for"> This Module is Built for
 
 - Android AppsFlyer SDK **6.8.0**
 
-## <a id="install-sdk">  Adding The SDK To Your Project
+## <a id="install-connector">  Adding The Connector To Your Project
 
 Add to your build.gradle file:
 
@@ -44,9 +44,9 @@ implementation 'com.android.billingclient:billing:$play_billing_version'
 
 where play_billing_version is 3.x.x. Note, versions 4 and 5 of Billing Client are not supported!
 
-## <a id="basic-integration"> Basic Integration Of The SDK
+## <a id="basic-integration"> Basic Integration Of The Connector
 ### <a id="create-instance"> Create PurchaseClient Instance 
-Create an instance of this SDK to configure (in the following steps) for observing and validating transactions in your app. </br>
+Create an instance of this Connector to configure (in the following steps) for observing and validating transactions in your app. </br>
 **Make sure to save a reference to the built object. If the object is not saved, it could lead to unexpected behavior and memory leaks.** </br>
 
 * Kotlin
@@ -95,7 +95,7 @@ Stop the SDK instance from observing transactions. </br>
 
 ### <a id="log-subscriptions"> Log Subscriptions
 Enables automatic logging of subscription events. </br>
-Pass true to enable, false to disable. Disabled by default</br>
+Set true to enable, false to disable. Disabled by default</br>
 * Kotlin
 ```kotlin
         builder.logSubscriptions(true)
@@ -106,9 +106,9 @@ Pass true to enable, false to disable. Disabled by default</br>
         builder.logSubscriptions(true);
 ```
 
-### <a id="log-inapps"> Log In App
+### <a id="log-inapps"> Log In App Purchases
 Enables automatic logging of In-App purchase events</br>
-Pass true to enable, false to disable. Disabled by default</br>
+Set true to enable, false to disable. Disabled by default</br>
 * Kotlin
 ```kotlin
         builder.autoLogInApps(true)
@@ -120,7 +120,7 @@ Pass true to enable, false to disable. Disabled by default</br>
 ```
 
 ##  <a id="data-source"> Register Purchase Event Data Source
-Purchase Event Data source listener. Invoked before sending data to AppsFlyer servers to let developer add extra parameters to the payload.
+Purchase Event Data source listener. Invoked before sending data to AppsFlyer servers to let the developer add extra parameters to the payload.
 
 ### <a id="ars-data-source"> Subscription Purchase Event Data Source
 
@@ -328,8 +328,8 @@ You can register listeners to get the validation results once getting a response
 ```
 
 ## <a id="testing"> Testing The Integration
-You can slect which environment will be used for validation **production** or **sandbox** (production by default). The sandbox environment should be used while testing your [Google Play Billing Library integration](https://developer.android.com/google/play/billing/test).</br>
-To set the environment to sandbox, call the following builder method with `true` value. Make sure to set the environment to production before uploading your app to the plat store (call the method with `false` or complitly remove this call). 
+You can select which environment will be used for validation **production** or **sandbox** (production by default). The sandbox environment should be used while testing your [Google Play Billing Library integration](https://developer.android.com/google/play/billing/test).</br>
+To set the environment to sandbox, call the following builder method with `true` value. Make sure to set the environment to production before uploading your app to the plat store (call the method with `false` or completely remove this call). 
 * Kotlin
 ```kotlin
         // sandbox environment
