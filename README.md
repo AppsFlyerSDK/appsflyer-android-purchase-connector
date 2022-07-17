@@ -42,7 +42,9 @@ implementation 'com.appsflyer:purchase-connector:0.2.0'
 implementation 'com.android.billingclient:billing:$play_billing_version'
 ```
 
-where play_billing_version is 3.x.x. Note, versions 4 and 5 of Billing Client are not supported!
+where play_billing_version is 3.x.x. </br>
+
+**Note: Version 0.2.0 of the Purchase Connector supports Billing Library version 3. Version 4 update coming soon.**
 
 ## <a id="basic-integration"> Basic Integration Of The Connector
 ### <a id="create-instance"> Create PurchaseClient Instance 
@@ -95,7 +97,8 @@ Stop the SDK instance from observing transactions. </br>
 
 ### <a id="log-subscriptions"> Log Subscriptions
 Enables automatic logging of subscription events. </br>
-Set true to enable, false to disable. Disabled by default</br>
+Set true to enable, false to disable.</br>
+If this API is not used,  by default, the connector will not record Subscriptions.</br>
 * Kotlin
 ```kotlin
         builder.logSubscriptions(true)
@@ -108,7 +111,8 @@ Set true to enable, false to disable. Disabled by default</br>
 
 ### <a id="log-inapps"> Log In App Purchases
 Enables automatic logging of In-App purchase events</br>
-Set true to enable, false to disable. Disabled by default</br>
+Set true to enable, false to disable.</br>
+If this API is not used,  by default, the connector will not record In App Purchases.</br>
 * Kotlin
 ```kotlin
         builder.autoLogInApps(true)
