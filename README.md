@@ -520,4 +520,7 @@ To set the environment to sandbox, call the following builder method with `true`
                 })
                 // Build the client
                 .build();
+                
+        // Start the SDK instance to observe transactions.
+        afPurchaseClient.startObservingTransactions();
 ```
