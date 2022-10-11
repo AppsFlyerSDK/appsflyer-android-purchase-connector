@@ -3,6 +3,7 @@
 # Android Purchase Connector
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/AppsFlyerSDK/android-purchase-connector/blob/main/LICENSE)
+[![Release Artifacts](https://img.shields.io/nexus/r/com.appsflyer/purchase-connector.svg?server=https%3A%2F%2Foss.sonatype.org)](https://repo1.maven.org/maven2/com/appsflyer/purchase-connector/)
 
 🛠 In order for us to provide optimal support, we would kindly ask you to submit any issues to
 support@appsflyer.com
@@ -31,20 +32,19 @@ support@appsflyer.com
 
 ## <a id="plugin-build-for"> This Module is Built for
 
-- Android AppsFlyer SDK **6.8.0**
+- Android AppsFlyer SDK **6.8.0** and above
 
 ## <a id="install-connector">  Adding The Connector To Your Project
 
 Add to your build.gradle file:
 
 ```
-implementation 'com.appsflyer:purchase-connector:0.2.0'
+implementation 'com.appsflyer:purchase-connector:1.0.0'
 implementation 'com.android.billingclient:billing:$play_billing_version'
 ```
 
-where play_billing_version is 3.x.x. </br>
+where `play_billing_version` is 4.x.x. </br>
 
-**Note: Version 0.2.0 of the Purchase Connector supports Billing Library version 3. Version 4 update coming soon.**
 
 ## <a id="basic-integration"> Basic Integration Of The Connector
 ### <a id="create-instance"> Create PurchaseClient Instance 
