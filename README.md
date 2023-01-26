@@ -76,9 +76,9 @@ Create an instance of this Connector to configure (in the following steps) for o
 Start the SDK instance to observe transactions. </br>
 
 **⚠️ Please Note**
-> You should call this method immediately after [starting the core Android SDK](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk).
-> The SDK will not report active subscriptions if you call this method only when starting a new purchase flow.
-
+> This should be called right after calling the Android SDK's [`start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk) method.
+>  Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in app purchases.
+>  The best practice is to activate the listener as early as possible, preferably in the `Application` class.
 * Kotlin
 ```kotlin
         // start
@@ -94,9 +94,9 @@ Start the SDK instance to observe transactions. </br>
 ### <a id="stop"> Stop Observing Transactions
 Stop the SDK instance from observing transactions. </br>
 **⚠️ Please Note**
-
-> You should call this API only when you want the SDK instance to stop listening for purchase transactions.
-> Usually, you should avoid using this API unless you want to create a new SDK instance or altogether opt out from purchase transaction reporting.
+> This should be called if you would like to stop the Connector from listening to billing transactions. This removes the listener and stops observing new transactions. 
+> An example for using this API is if the app wishes to stop sending data to AppsFlyer due to changes in the user's consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
+> If you do decide to use it, it should be called right before calling the Android SDK's [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API
 
 * Kotlin
 ```kotlin
