@@ -12,22 +12,22 @@ support@appsflyer.com
 
 <!-- TOC start -->
 ## Table Of Content
-  * [This Module is Built for](#plugin-build-for)
-  * [Adding The Connector To Your Project](#install-connector)
-  * [Basic Integration Of The Connector](#basic-integration)
+* [This Module is Built for](#plugin-build-for)
+* [Adding The Connector To Your Project](#install-connector)
+* [Basic Integration Of The Connector](#basic-integration)
     + [Create PurchaseClient Instance ](#create-instance)
     + [Start Observing Transactions](#start)
     + [Stop Observing Transactions](#stop)
     + [Log Subscriptions](#log-subscriptions)
     + [Log In App](#log-inapps)
-  * [Register Purchase Event Data Source](#data-source)
+* [Register Purchase Event Data Source](#data-source)
     + [Subscription Purchase Event Data Source](#ars-data-source)
     + [In Apps Purchase Event Data Source](#inapps-data-source)
-  * [Register Validation Results Listeners](#validation-callbacks)
+* [Register Validation Results Listeners](#validation-callbacks)
     + [Subscription Validation Result Listener](#ars-validation-callbacks)
     + [In Apps Validation Result Listener](#inapps-validation-callbacks)
-  * [ Testing The Integration](#testing)
-  * [Full Code Example](#example)
+* [ Testing The Integration](#testing)
+* [Full Code Example](#example)
 <!-- TOC end -->
 
 ## <a id="plugin-build-for"> This Module is Built for
@@ -36,18 +36,23 @@ support@appsflyer.com
 
 ## <a id="install-connector">  Adding The Connector To Your Project
 
-Add to your build.gradle file:
+1. Add to your build.gradle file:
 
-```
-implementation 'com.appsflyer:purchase-connector:1.0.0'
-implementation 'com.android.billingclient:billing:$play_billing_version'
-```
+   ```
+   implementation 'com.appsflyer:purchase-connector:1.0.0'
+   implementation 'com.android.billingclient:billing:$play_billing_version'
+   ```
 
-where `play_billing_version` is 4.x.x. </br>
-
+   where `play_billing_version` is 4.x.x. </br>
+2.  If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
+    ```grooby
+    -keep class com.appsflyer.** { *; }
+    -keep class kotlin.jvm.internal.Intrinsics{ *; }
+    -keep class kotlin.collections.**{ *; }
+    ```
 
 ## <a id="basic-integration"> Basic Integration Of The Connector
-### <a id="create-instance"> Create PurchaseClient Instance 
+### <a id="create-instance"> Create PurchaseClient Instance
 Create an instance of this Connector to configure (in the following steps) for observing and validating transactions in your app. </br>
 **Make sure to save a reference to the built object. If the object is not saved, it could lead to unexpected behavior and memory leaks.** </br>
 
@@ -69,6 +74,11 @@ Create an instance of this Connector to configure (in the following steps) for o
 
 ### <a id="start"> Start Observing Transactions
 Start the SDK instance to observe transactions. </br>
+
+**⚠️ Please Note**
+> This should be called right after calling the Android SDK's [`start`](https://dev.appsflyer.com/hc/docs/integrate-android-sdk#starting-the-android-sdk) method.
+>  Calling `startObservingTransactions` activates a listener that automatically observes new billing transactions. This includes new and existing subscriptions and new in app purchases.
+>  The best practice is to activate the listener as early as possible, preferably in the `Application` class.
 * Kotlin
 ```kotlin
         // start
@@ -83,6 +93,11 @@ Start the SDK instance to observe transactions. </br>
 
 ### <a id="stop"> Stop Observing Transactions
 Stop the SDK instance from observing transactions. </br>
+**⚠️ Please Note**
+> This should be called if you would like to stop the Connector from listening to billing transactions. This removes the listener and stops observing new transactions. 
+> An example for using this API is if the app wishes to stop sending data to AppsFlyer due to changes in the user's consent (opt-out from data sharing). Otherwise, there is no reason to call this method.
+> If you do decide to use it, it should be called right before calling the Android SDK's [`stop`](https://dev.appsflyer.com/hc/docs/android-sdk-reference-appsflyerlib#stop) API
+
 * Kotlin
 ```kotlin
         // start
@@ -128,7 +143,7 @@ Purchase Event Data source listener. Invoked before sending data to AppsFlyer se
 
 ### <a id="ars-data-source"> Subscription Purchase Event Data Source
 
-* Kotlin 
+* Kotlin
 ```kotlin
         builder.setSubscriptionPurchaseEventDataSource(object : PurchaseClient.SubscriptionPurchaseEventDataSource{
             override fun onNewPurchases(purchaseEvents: List<SubscriptionPurchaseEvent>): Map<String, Any> {
@@ -166,7 +181,7 @@ Purchase Event Data source listener. Invoked before sending data to AppsFlyer se
 
 ### <a id="inapps-data-source"> In Apps Purchase Event Data Source
 
-* Kotlin 
+* Kotlin
 ```kotlin
         builder.setInAppPurchaseEventDataSource(object :
             PurchaseClient.InAppPurchaseEventDataSource {
@@ -333,7 +348,7 @@ You can register listeners to get the validation results once getting a response
 
 ## <a id="testing"> Testing The Integration
 You can select which environment will be used for validation **production** or **sandbox** (production by default). The sandbox environment should be used while testing your [Google Play Billing Library integration](https://developer.android.com/google/play/billing/test).</br>
-To set the environment to sandbox, call the following builder method with `true` value. Make sure to set the environment to production before uploading your app to the plat store (call the method with `false` or completely remove this call). 
+To set the environment to sandbox, call the following builder method with `true` value. Make sure to set the environment to production before uploading your app to the plat store (call the method with `false` or completely remove this call).
 * Kotlin
 ```kotlin
         // sandbox environment
@@ -354,9 +369,16 @@ To set the environment to sandbox, call the following builder method with `true`
 ## <a id="example"> Full Code Example
 * Kotlin
 ```kotlin
+    override fun onCreate() {
+        super.onCreate()
+        // init and start the native AppsFlyer Core SDK
+        AppsFlyerLib.getInstance().apply {
+            init("YOUR_DEV_KEY", listener, applicationContext)
+            start(applicationContext)
+        }
         // init - Make sure to save a reference to the built object. If the object is not saved, 
         // it could lead to unexpected behavior and memory leaks.
-        val afPurchaseClient = PurchaseClient.Builder(context, Store.GOOGLE)
+        val afPurchaseClient = PurchaseClient.Builder(applicationContext, Store.GOOGLE)
             // Enable Subscriptions auto logging
             .logSubscriptions(true)
             // Enable In Apps auto logging
@@ -386,11 +408,17 @@ To set the environment to sandbox, call the following builder method with `true`
                 override fun onResponse(result: Map<String, SubscriptionValidationResult>?) {
                     result?.forEach { (k: String, v: SubscriptionValidationResult?) ->
                         if (v.success) {
-                            Log.d(TAG, "[PurchaseConnector]: Subscription with ID $k was validated successfully")
+                            Log.d(
+                                TAG,
+                                "[PurchaseConnector]: Subscription with ID $k was validated successfully"
+                            )
                             val subscriptionPurchase = v.subscriptionPurchase
                             Log.d(TAG, subscriptionPurchase.toString())
                         } else {
-                            Log.d(TAG, "[PurchaseConnector]: Subscription with ID $k wasn't validated successfully")
+                            Log.d(
+                                TAG,
+                                "[PurchaseConnector]: Subscription with ID $k wasn't validated successfully"
+                            )
                             val failureData = v.failureData
                             Log.d(TAG, failureData.toString())
                         }
@@ -409,11 +437,17 @@ To set the environment to sandbox, call the following builder method with `true`
                 override fun onResponse(result: Map<String, InAppPurchaseValidationResult>?) {
                     result?.forEach { (k: String, v: InAppPurchaseValidationResult?) ->
                         if (v.success) {
-                            Log.d(TAG, "[PurchaseConnector]:  Product with Purchase Token$k was validated successfully")
+                            Log.d(
+                                TAG,
+                                "[PurchaseConnector]:  Product with Purchase Token$k was validated successfully"
+                            )
                             val productPurchase = v.productPurchase
                             Log.d(TAG, productPurchase.toString())
                         } else {
-                            Log.d(TAG, "[PurchaseConnector]:  Product with Purchase Token $k wasn't validated successfully")
+                            Log.d(
+                                TAG,
+                                "[PurchaseConnector]:  Product with Purchase Token $k wasn't validated successfully"
+                            )
                             val failureData = v.failureData
                             Log.d(TAG, failureData.toString())
                         }
@@ -430,14 +464,19 @@ To set the environment to sandbox, call the following builder method with `true`
 
         // Start the SDK instance to observe transactions.
         afPurchaseClient.startObservingTransactions()
-
+    }
 ```
 
 * Java
 ```java
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        AppsFlyerLib.getInstance().init("YOUR_DEV_KEY", listener, getApplicationContext());
+        AppsFlyerLib.getInstance().start(getApplicationContext());
         // init - Make sure to save a reference to the built object. If the object is not saved,
         // it could lead to unexpected behavior and memory leaks.
-        PurchaseClient afPurchaseClient = new PurchaseClient.Builder(context, Store.GOOGLE)
+        PurchaseClient afPurchaseClient = new PurchaseClient.Builder(getApplicationContext(), Store.GOOGLE)
                 // Enable Subscriptions auto logging
                 .logSubscriptions(true)
                 // Enable In Apps auto logging
@@ -520,7 +559,9 @@ To set the environment to sandbox, call the following builder method with `true`
                 })
                 // Build the client
                 .build();
-                
+
         // Start the SDK instance to observe transactions.
         afPurchaseClient.startObservingTransactions();
+    }
+ 
 ```
