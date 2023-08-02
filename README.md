@@ -32,18 +32,18 @@ support@appsflyer.com
 
 ## <a id="plugin-build-for"> This Module is Built for
 
-- Android AppsFlyer SDK **6.8.0** and above
+- Android AppsFlyer SDK **6.12.2** and above
 
 ## <a id="install-connector">  Adding The Connector To Your Project
 
 1. Add to your build.gradle file:
 
    ```
-   implementation 'com.appsflyer:purchase-connector:1.0.0'
+   implementation 'com.appsflyer:purchase-connector:2.0.0'
    implementation 'com.android.billingclient:billing:$play_billing_version'
    ```
 
-   where `play_billing_version` is 4.x.x. </br>
+   where `play_billing_version` is 5.2.x. </br>
 2.  If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
     ```grooby
     -keep class com.appsflyer.** { *; }
