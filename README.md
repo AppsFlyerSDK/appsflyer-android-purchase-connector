@@ -13,6 +13,7 @@ support@appsflyer.com
 <!-- TOC start -->
 ## Table Of Content
 * [This Module is Built for](#plugin-build-for)
+* [Important Note](#important-note)
 * [Adding The Connector To Your Project](#install-connector)
 * [Basic Integration Of The Connector](#basic-integration)
     + [Create PurchaseClient Instance ](#create-instance)
@@ -33,6 +34,12 @@ support@appsflyer.com
 ## <a id="plugin-build-for"> This Module is Built for
 
 - Android AppsFlyer SDK **6.12.2** and above
+
+## <a id="important-note"> ⚠️ ⚠️ Important Note ⚠️ ⚠️ 
+
+Purchase Connector v2.0.0 can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.2.x.
+
+Using Purchase Connector v2.0.0 with an older SDK version will cause the server to reject the Purchase requests.
 
 ## <a id="install-connector">  Adding The Connector To Your Project
 
