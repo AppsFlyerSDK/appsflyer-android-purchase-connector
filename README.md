@@ -37,20 +37,26 @@ support@appsflyer.com
 
 ## <a id="important-note"> ⚠️ ⚠️ Important Note ⚠️ ⚠️ 
 
-Purchase Connector v2.0.1 can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v6.x.x.
+Purchase Connector v2.0.0 (and above) can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.x.x and V6.x.x.
 
-Using Purchase Connector v2.0.1 with an older SDK version will cause the server to reject the Purchase requests.
+Using Purchase Connector v2.x.x with an older SDK version will cause the server to reject the Purchase requests.
+
+| Purcahse Connector Version | Supported Billing Library Versions | Supported AppsFlyer SDK Versions |
+|----------------------------|------------------------------------|----------------------------------|
+| v2.0.0                     | v5.x.x                             | v6.12.2 and above                |
+| v2.0.1                     | v5.x.x - v6.x.x                    | v6.12.2 and above                |
+
 
 ## <a id="install-connector">  Adding The Connector To Your Project
 
 1. Add to your build.gradle file:
 
    ```
-   implementation 'com.appsflyer:purchase-connector:2.0.0'
+   implementation 'com.appsflyer:purchase-connector:2.0.1'
    implementation 'com.android.billingclient:billing:$play_billing_version'
    ```
 
-   where `play_billing_version` is 6.x.x. </br>
+   where `play_billing_version` is 5.x.x or 6.x.x. </br>
 2.  If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
     ```grooby
     -keep class com.appsflyer.** { *; }
