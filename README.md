@@ -37,14 +37,14 @@ support@appsflyer.com
 
 ## <a id="important-note"> ⚠️ ⚠️ Important Note ⚠️ ⚠️ 
 
-Purchase Connector v2.0.0 (and above) can only be used with SDK v6.12.2 (and above), as this is the setup that supports Billing Library v5.x.x and V6.x.x.
+Some Purchase Connector versions require a specific version of the AppsFlyer SDK to operate properly.
+The following table details the compatibility between the Purchase Connector versions and the SDK versions.
 
-Using Purchase Connector v2.x.x with an older SDK version will cause the server to reject the Purchase requests.
-
-| Purcahse Connector Version | Supported Billing Library Versions | Supported AppsFlyer SDK Versions |
+| Purchase Connector Version | Supported AppsFlyer SDK Versions | Supported Billing Library Versions 
 |----------------------------|------------------------------------|----------------------------------|
-| v2.0.0                     | v5.x.x                             | v6.12.2 and above                |
-| v2.0.1                     | v5.x.x - v6.x.x                    | v6.12.2 and above                |
+| v2.0.0                     | v6.12.2 - v6.14.3                | v5.x.x                             |
+| v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v6.x.x                    |
+| v2.1.0                     | v6.15.0 (and above)                |v5.x.x - v6.x.x                    |
 
 
 ## <a id="install-connector">  Adding The Connector To Your Project
@@ -52,7 +52,7 @@ Using Purchase Connector v2.x.x with an older SDK version will cause the server 
 1. Add to your build.gradle file:
 
    ```
-   implementation 'com.appsflyer:purchase-connector:2.0.1'
+   implementation 'com.appsflyer:purchase-connector:2.1.0'
    implementation 'com.android.billingclient:billing:$play_billing_version'
    ```
 
