@@ -62,6 +62,7 @@ The following table details the compatibility between the Purchase Connector ver
     -keep class com.appsflyer.** { *; }
     -keep class kotlin.jvm.internal.Intrinsics{ *; }
     -keep class kotlin.collections.**{ *; }
+    -keep class kotlin.** { *; }
     ```
 
 ## <a id="basic-integration"> Basic Integration Of The Connector
