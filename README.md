@@ -33,7 +33,7 @@ support@appsflyer.com
 
 ## <a id="plugin-build-for"> This Module is Built for
 
-- Android AppsFlyer SDK **6.12.2** and above
+- Android AppsFlyer SDK **6.15.0** and above
 
 ## <a id="important-note"> ⚠️ ⚠️ Important Note ⚠️ ⚠️ 
 
