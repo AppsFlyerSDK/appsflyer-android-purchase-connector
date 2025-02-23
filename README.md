@@ -52,7 +52,7 @@ The following table details the compatibility between the Purchase Connector ver
 1. Add to your build.gradle file:
 
    ```
-   implementation 'com.appsflyer:purchase-connector:2.1.0'
+   implementation 'com.appsflyer:purchase-connector:2.1.1'
    implementation 'com.android.billingclient:billing:$play_billing_version'
    ```
 
