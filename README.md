@@ -43,8 +43,9 @@ The following table details the compatibility between the Purchase Connector ver
 | Purchase Connector Version | Supported AppsFlyer SDK Versions | Supported Billing Library Versions 
 |----------------------------|------------------------------------|----------------------------------|
 | v2.0.0                     | v6.12.2 - v6.14.3                | v5.x.x                             |
-| v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v6.x.x                    |
-| v2.1.0                     | v6.15.0 (and above)                |v5.x.x - v6.x.x                    |
+| v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v7.x.x                    |
+| v2.1.0                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.1.1                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
 
 
 ## <a id="install-connector">  Adding The Connector To Your Project
