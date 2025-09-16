@@ -46,6 +46,8 @@ The following table details the compatibility between the Purchase Connector ver
 | v2.0.1                     | v6.12.2 - v6.14.3                | v5.x.x - v7.x.x                    |
 | v2.1.0                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
 | v2.1.1                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.1.2                     | v6.15.0 (and above)              | v5.x.x - v7.x.x                    |
+| v2.2.0                     | v6.15.0 (and above)              | v8.x.x                             |
 
 
 ## <a id="install-connector">  Adding The Connector To Your Project
@@ -53,11 +55,11 @@ The following table details the compatibility between the Purchase Connector ver
 1. Add to your build.gradle file:
 
    ```
-   implementation 'com.appsflyer:purchase-connector:2.1.1'
+   implementation 'com.appsflyer:purchase-connector:2.2.0'
    implementation 'com.android.billingclient:billing:$play_billing_version'
    ```
 
-   where `play_billing_version` is 5.x.x or 6.x.x. </br>
+   where `play_billing_version` is 7.x.x or 8.x.x. </br>
 2.  If you are using ProGuard, add following keep rules to your `proguard-rules.pro` file:
     ```grooby
     -keep class com.appsflyer.** { *; }
